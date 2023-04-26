@@ -1,7 +1,6 @@
 package ru.kpfu.itis.labenskaya;
 
 import ru.kpfu.itis.labenskaya.tree.AVLTree;
-import ru.kpfu.itis.labenskaya.tree.Node;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,13 +16,18 @@ public class Main {
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             int count = 0;
+            int[] arr = new int[1000];
             while (line != null) {
                 int key = Integer.parseInt(line);
-                double startTime1 = System.nanoTime();
+                arr[count++] = key;
                 avlTree.insert(avlTree.getRoot(), key);
-                double endTime1 = System.nanoTime();
-                System.out.println(++count + " " + (int)(endTime1-startTime1));
                 line = reader.readLine();
+            }
+            for (int i = 999; i >= 0; i--) {
+                double startTime1 = System.nanoTime();
+                avlTree.delete(avlTree.getRoot(), arr[i]);
+                double endTime1 = System.nanoTime();
+                System.out.println((int) (endTime1 - startTime1));
             }
         }
         catch (IOException ex) {
